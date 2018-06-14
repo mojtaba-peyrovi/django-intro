@@ -1,0 +1,14 @@
+django:
+part2- making a project
+terminal:  django-admin startproject <project_name>
+mange.py never edit it. 
+url.py   => its like routes/web.php in laravel.  registering routes.
+==
+to boot the server:  navigate to prject folder:  python manage.py runserver
+---------------------
+part3:  make an app in the project:   in terminal :  python manage.py startapp <app_name>
+---------------------
+part4:  
+admin.py contains all the admin functionalities
+models.py where we can add models, database migrations, schema, etc.
+
