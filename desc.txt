@@ -11,4 +11,30 @@ part3:  make an app in the project:   in terminal :  python manage.py startapp <
 part4:  
 admin.py contains all the admin functionalities
 models.py where we can add models, database migrations, schema, etc.
+----------------------------------
+
+part 9: 
+in order to run the shell( like Tinker in Laravel)  we just have to get into the app folder then say; Python manage.py shell.
+when we want to work with database we need to import the models like this:  from music.models import Album, Song (these 2 are the models we made before)
+- when we want to see objects we have stored in models we need to say;   Album.objects.all( )
+- in order to add objects to the model ==> a = Album(field1="value1", field2="value2", ..........)      and at the end we say   a.save( )
+-if you want to see any object of the record we can say;  a.title  and it returns it.
+------------------------
+part 10:
+in order for us to define any specific representation of the model in command line we need to add it to the model as a method like this:
+
+def __str__(sef):
+     return self.<field_name1> + <field_name2> + ....  
+
+if we want to see any specific value record based on a criteria we can use <model_name>.filter(<field_name> criteria)
+it doesnt accept <> we can use =  
+also we can say;   Album.filter(artist__startswith='Taylor') then it returns Taylor Swift and her album
+----------------------------
+part 11:
+we need to make a superuser (admin)     easily we say:   python manage.py createsuperuser
+and then we login to the server /admin and login. then we access the backend.
+in order to add the models we made in terminal to the backend we just need to say:
+          from django.contrib import admin
+          from .models import Album
+          admin.site.register(Album);
 
