@@ -37,4 +37,40 @@ in order to add the models we made in terminal to the backend we just need to sa
           from django.contrib import admin
           from .models import Album
           admin.site.register(Album);
+----------------------------
+part 12,13 :
+whenever we want to make a new view, we first need to add a new url:
+   we go to the app we want (here is music) then open urls.py
+   inside urls.py inside the urlpatterns array we say:   url(r'^$',<view_name>, name=<route_name>
+r: means regular expression     ^ (carrot means the beginning)   $ (means the end)
+in order to tell django that it is the id and has to be used in the view later, we say:
+url(r'^(?P<album_id>[0-9]+)/$')  ==> [0-9]+  means integer between 0-9 and the the plus means any bigger integer. 
+that <album_id> we registered with the url now we can inject it into the view function.
+ -----------------------------------
+part14:
+ templates:
+anytime we want to work with templates we need to say:
+from django.template import loader
+then we need to make a directory called templates under the app directory and inside of it we make a
+new folder the same name as the app.
+now, inside this inner folder we can make our index,html
+then in views we say: template = loader.get_template('music/index.html')   music refers to the inner app 
+folder we made inside templates folder.
+then we need to define a dictionary and pass all variables we defined and will name is context.
+and when we say return HttpResponse(template.render(context, request))
+blade templating convention;
+  {% for album in all_albums %}
+      <li class="list-group-item"><a href="/music/{{ album.id }}">{{ album.album_title }}</a></li>
+  {% endfor %}
+so similar to laravel.
+when we want to know if there is any record in the database using blade;
+{% if all_albums %}   then we can add {%else%} and the rest is like laravel.
+--------------------------------
+part 15:
+another way of doing the templating:
+form django.shortcuts import render
+
+then we say return render(request, 'music/index.html', context)
+--------------------------------------
+
 
