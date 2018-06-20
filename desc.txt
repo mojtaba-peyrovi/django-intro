@@ -73,4 +73,33 @@ form django.shortcuts import render
 then we say return render(request, 'music/index.html', context)
 --------------------------------------
 
+pat16:
+ in order to get 404 error for worng music id numbers we can import it to views.py as:
+from django.httml import Http44
+then we need to write a try-except error handling and in except part we say: 
+raise Http404("<message_we_want_to_display")
+---------------------------
+part 17:
+after making each model we need to define the string representation of the records by writing a method like this:
+edf __str__(self):
+      return self.<the_field_we_want>  e.g. return self.song_title
+IMPORTANT: everytime we add/remove/change any field in a model we need to migrate the models again. 
+for adding a song we can do it from terminal by instantiating a Song() object, adding fields one by one and at the end save().
+---------------------------
+part18:
+because we have made a one to many relationship between album and songs we can access songs through the album. 
+we can say: album1.song_set.all() ====> this shows all the songs inside album1
+anoher way to add a song is:   album1.song_set.create(<pass_all_key_value_pairs_here>)
+- if we want to know how many songs are saved in an album:
+album1.song_set.count()
+--------------------------
+part19:
+making the details page is similar to Laravel. nothing new.
+
+---------------------------
+part20:
+we can make this url dynamic: /music/{{ album.id }}
+like this:  in the urls page we name each route and now we can use those names to make the routes in html dynamic.
+{% url 'detail' album.id %}     -->detail is the name of the route we put at urls.py.   and album.id is the dynamic part of the url.
+
 
