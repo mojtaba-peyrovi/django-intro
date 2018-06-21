@@ -49,11 +49,31 @@
                     <h5 class="card-title">{{ album.album_title }}</h5>
                     <p class="card-text  badge badge-success">{{album.artist}}</p>
                     <h6>Songs:</h6>
-                    <ul>
+                    <!-- <ul>
                         {% for song in album.song_set.all %}
-                        <li>{{ song.song_title }} - {{ song.file_type }}</li>
+                           <li>{{ song.song_title }} - {{ song.file_type }}</li>
                         {% endfor %}
-                    </ul>
+                    </ul> -->
+                    {% if error_message %}
+                        <p class="alert alert-danger"></p>
+                    {% endif %}
+
+                    <form class="form" action="{% url 'music:favorite' album.id %}" method="post">
+                        {% csrf_token %}
+                        {% for song in album.song_set.all %}
+                        <div class="form-group form-check">
+                            <input type="checkbox" name="song" value="{{ song.id }}" id="song{{ forloop.counter }}" class="form-check-input">
+                            <label for="song{{ forloop.counter }}" class="form-check-label">
+                                {{ song.song_title }}
+                                {% if song.is_favorite %}
+                                    <img src="https://vignette.wikia.nocookie.net/animalcrossing/images/2/2e/Star.png/revision/latest?cb=20150911213916" alt="" width="20px" height="auto">
+                                {% endif %}
+                            </label>
+                        </div>
+                        {% endfor %}
+                        <input type="submit" name="" value="submit" class="btn btn-outline-success btn-block">
+                    </form>
+
                   </div>
               </div>
           </div>
