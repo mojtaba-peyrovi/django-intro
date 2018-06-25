@@ -144,3 +144,53 @@ app name and inside that folder we can have css, js, images, etc. folders.
 <a class="navbar-brand" href="{% url 'music:index' %}">My-Playlist</a>
 -------------------------------
 
+part 28:
+in order to do templating, agian its so similar to laravel. 
+laravel:  @extend('master')   ==>django :  {%extends 'path_to_the_master%}
+laravel: @yield('view_name') ==> django: {% block <a_proper_name> %} 
+laravel: @section('view_name') ==>django: {% block <a_proper_name> %} 
+-------------------------
+part 29:
+insetad of wiriting all the logic inside views.py which is so similar to controllers in Laravel, we can simply use generic views:
+we need to import :
+from django.views import generic
+also we import the model we want  :  from models import Album
+then its so easy instead of functions we need to define some classes: 
+for index: 
+class IndexView(generic.ListView):
+    template_name = 'music/index.html'
+    def get_queryset(self):
+     return Album.objects.all();
+and for details view:
+class DetailView(generic.DetailView):
+    model = Album
+    template_name = 'music/detail.html'
+thats it. all the logic will be automatically work.,
+we need also to change our urls.py because we dont use views anymore, we use classed instead, we need to change the view names as class names, like this:
+views.IndexView.as_view()  ==> .a as_view() method at the end says to django to use class as view. 
+since the detail class expects primary key we need to change album_id in the rotue at url.py to id or pk
+- now django needs to know the models form database are saved with waht name to be rendered in the view? by default we can use object_list as the variable. 
+like this: {% for album in all_albums %}  ==> needs to change to ; {% for album in object_list %}
+- if we want to change the default name we can overwrite this variable:  context_object_name = 'all_albums_for_moji'    it can be any custom name. 
+--------------------------------
+part 30:
+model forms are some helpers to take care of developing forms easier and validating them easier. 
+in models.py we need to say : from django.core.urlresolvers import reverse.
+then we add this function to models.Album class: 
+def get_absolute_url(self):
+        return reverse('music:Detail', kwargs={'pk':self.pk})
+
+- then in views.py we have to import :  
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+and make a new class named AlbumCreate(CreateView):
+    model = Albums
+    fields = [
+        'artist',
+        'album_title',
+        'genre',
+        'logo'
+    ]
+
+
+
