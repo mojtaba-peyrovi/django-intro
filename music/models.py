@@ -8,7 +8,7 @@ class Album(models.Model):
     logo = models.CharField(max_length=1000)
 
     def get_absolute_url(self):
-        return reverse('music:Detail', kwargs={'pk':self.pk})
+        return reverse('music:detail', kwargs={'pk':self.pk})
     def __str__(self):
         return self.album_title + ' - '+ self.artist
 

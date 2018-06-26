@@ -9,9 +9,9 @@
             <div class="row">
                 {% if all_albums %}
                        {% for album in all_albums %}
-                            <div class="card mr-4" style="width: 18rem;">
+                            <div class="card mr-4 mt-4" style="width: 16rem;">
                                 <a href="{% url 'music:detail' album.id %}">
-                                    <img class="card-img-top" src="{{album.logo}}" alt="Card image cap" width="286px;" height="169px;">
+                                    <img class="card-img-top" src="{{album.logo}}" alt="Card image cap" width="286px;" height="auto;">
                                 </a>
                                  <div class="card-body">
                                       <strong class="card-title">{{ album.album_title}}</strong>
@@ -19,7 +19,7 @@
                                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                       <div class="card-buttons flex">
                                           <a href="{% url 'music:detail' album.id %}" class="btn btn-primary">More Details</a>
-                                          <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                          <a href="{% url 'music:album-delete' album.id %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                                           <a href="#" class="btn btn-warning"><i class="far fa-star"></i></a>
                                       </div>
                                  </div>

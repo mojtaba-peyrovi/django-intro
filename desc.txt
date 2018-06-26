@@ -191,6 +191,25 @@ and make a new class named AlbumCreate(CreateView):
         'genre',
         'logo'
     ]
+---------------------------------
+part 31:
 
+in order to make the form in html we need to get into the templates/<app_folder> then make a new file called: <model_name>_form.html
+ in this file we need to define the form template. we call it form-template.html inside app folder.
+- its easier than laravel because for making the form, we can easily use a for loop inside the form-template.html to auto generate 
+all the fields required and django will take care of the rest of it. 
+
+---------------------------------
+
+part 32:
+Update and delet views.
+we need to import one more library :   from django.core.urlresolvers import reverse_lazy
+in order to make update view, the class in views.py is exactly like createView class. we just need to copy it and 
+change the name from CreateView to UpdateView. that's it. 
+for delete again we copy the same class and again say model=Album  and then we should say where to redirect after deleting. 
+we say: success_url = reverse_lazy('url_where_we_want_to_redirect) done.
+- then we need to make urls which are so similar to add. we copy and change them to the class name and the route structure we want.
+
+-----------------------------------
 
 
