@@ -11,7 +11,7 @@
                        {% for album in all_albums %}
                             <div class="card mr-4 mt-4" style="width: 16rem;">
                                 <a href="{% url 'music:detail' album.id %}">
-                                    <img class="card-img-top" src="{{album.logo}}" alt="Card image cap" width="286px;" height="auto;">
+                                    <img class="card-img-top" src="{{ album.logo.url }}" alt="Card image cap" width="286px;" height="auto;">
                                 </a>
                                  <div class="card-body">
                                       <strong class="card-title">{{ album.album_title}}</strong>

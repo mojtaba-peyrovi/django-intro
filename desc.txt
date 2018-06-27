@@ -212,4 +212,48 @@ we say: success_url = reverse_lazy('url_where_we_want_to_redirect) done.
 
 -----------------------------------
 
+part 33:
+for uploading photo instead of saving the url we can change the datatype from charField() to FileField().
+when we do this change and migrate it, in admin panel and frotend the file upload button will be all setup.
+- then we need to add this to setting.py under the main root :
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+- then we need to add these 2 lines to the urls.py under the main root. 
+
+from django.conf import settings
+
+from django.conf.urls.static import static
+
+*** on setting.py DEBUG=True means dev mode and DEBUG=False means production mode.
+in order to automate this we add:
+
+if setting.DEBUG:
+   
+   urlpatterns += static(settings.STATIC_URL, document_root=setting.STATIC_ROOT)
+    
+   urlpatterns += static(settings.MEDIA_URL, document_root=setting.MEDIA_ROOT)
+ to urls.py
+- it works now. all the photos are going to be saved in root in  a folder called Media.
+----------------------------------------
+
+part 34:
+for making auth user, we need to make a new file called forms.py and import:
+
+from django.contrib.auth.models import urlresolvers
+from django import forms
+then in views.py we import:
+
+from django.shortcuts import render, redirect
+
+from django.contrib.auth import authenticate, login
+from django.views.generic import View
+from  .forms import UserForm
+
+------------------------------------------
+
+part 35,36:
+
 
